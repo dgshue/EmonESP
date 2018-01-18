@@ -31,6 +31,7 @@
 #include "input.h"
 #include "emoncms.h"
 #include "mqtt.h"
+#include "ct.h"
 
 // -------------------------------------------------------------------
 // SETUP
@@ -62,6 +63,9 @@ void setup() {
 
   DEBUG.println("Server started");
 
+  //Setup ADS
+  ads_setup();
+
   delay(100);
 } // end setup
 
@@ -75,7 +79,7 @@ void loop()
   wifi_loop();
 
   String input = "";
-  boolean gotInput = input_get(input);
+  boolean gotInput = calcIrms(input);
 
   if (wifi_mode == WIFI_MODE_STA || wifi_mode == WIFI_MODE_AP_AND_STA)
   {

@@ -1,28 +1,19 @@
 
-# EmonESP
+# EmonMCU
 
-[![Build Status](https://travis-ci.org/openenergymonitor/EmonESP.svg?branch=master)](https://travis-ci.org/openenergymonitor/EmonESP)
+[![Build Status]
 
-ESP8266 WIFI serial to emoncms link
+Fork of popular EmonESP, this contains code to sample data directly from the NodeMCU or other ESP8266 board.  There is no need for a emonTx, only some very basic circuit skill, soldering, and a way to flash your MC.
 
-For applications that only require basic posting of data from one emonTx to a remote server such as Emoncms.org an emonTx with this WiFi module provides a lower cost route than an emonBase or emonPi base-station installation. 
-
-The core of EmonESP is also used for [emonPixel](https://github.com/openenergymonitor/emonpixel) and [OpenEVSE ESP WiFi 2.0](https://github.com/OpenEVSE/ESP8266_WiFi_v2.x).
-
-![EmonEsp WiFi AP Setup Portal](docs/emonesp.png)
+The same setup applies and I've left the instructions below from EmonESP.  The only tricky bit that I've not had to do before is write out to SPIFFS, but it wasn't difficult.  I recommend using Atom and PlatfomIO. This was a new tool for me with this project but I'm starting to dig it.
 
 ## Requirements
 
-- ESP-12E module with 4M Flash
+- ESP-12E or ESP-12
 
 ***
 
 # EmonESP User Guide
-
-## Hardware Setup 
-
-- [Purchase a pre-loaded ESP8266](https://shop.openenergymonitor.com/esp8266-wifi-adapter-for-emontx/)
-- To connect an ESP to emonTx see [This User Guide Section](https://guide.openenergymonitor.org/setup/esp8266-adapter-emontx/)
 
 ## First Setup
 
