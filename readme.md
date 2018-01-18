@@ -1,6 +1,14 @@
 # EmonMCU
 
+Fork of popular EmonESP, this contains code to sample data directly from the NodeMCU or other ESP8266 board.  There is no need for a emonTx, only some very basic circuit skill, soldering, and a way to flash your MC.
 
+Credit given to Tisham Dhar and his work on [HackADay.io](https://hackaday.io/project/8264-nodemcu-energy-monitor#menu-description), this is an adaptation of his code that was incorporated from EmonESP.
+
+## Requirements
+
+- ESP-12E or ESP-12
+- ADS1115 Shield
+- 2 x Current Transformers (any specification should do as you will need to tweak the     code to calibrate)
 
 # EmonESP User Guide
 
