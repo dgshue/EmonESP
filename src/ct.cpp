@@ -13,12 +13,6 @@
 #include <Wire.h>
 #include <Adafruit_ADS1015.h>
 
-double offsetI;
-double filteredI;
-double sqI,sumI;
-int16_t sampleI;
-double Irms;
-
 Adafruit_ADS1115 ads;  /* Use this for the 16-bit version */
 
 
@@ -43,33 +37,49 @@ double squareRoot(double fg)
 boolean calcIrms(String& data)
 {
 
+  double offsetCT1,offsetCT2;
+  double filteredCT1,filteredCT2;
+  double sqCT1,sumCT1;
+  double sqCT2,sumCT2;
+  int16_t sampleCT1,sampleCT2;
+  double IrmsCT1,IrmsCT2;
+
   int Number_of_Samples = 2048;
   /* Be sure to update this value based on the IC and the gain settings! */
   float multiplier = 0.250F;    /* ADS1115 @ +/- 4.096V gain (16-bit results) */
   for (unsigned int n = 0; n < Number_of_Samples; n++)
   {
-    sampleI = ads.readADC_Differential_0_1();
+    sampleCT1 = ads.readADC_Differential_0_1();
+    sampleCT2 = ads.readADC_Differential_2_3();
 
-  // Digital low pass filter extracts the 2.5 V or 1.65 V dc offset,
-  //  then subtract this - signal is now centered on 0 counts.
-    offsetI = (offsetI + (sampleI-offsetI)/1024);
-    filteredI = sampleI - offsetI;
-    //filteredI = sampleI * multiplier;
+    // Digital low pass filter extracts the 2.5 V or 1.65 V dc offset,
+    // then subtract this - signal is now centered on 0 counts.
+    offsetCT1 = (offsetCT1 + (sampleCT1-offsetCT1)/1024);
+    offsetCT2 = (offsetCT2 + (sampleCT2-offsetCT2)/1024);
+
+    filteredCT1 = sampleCT1 - offsetCT1;
+    filteredCT2 = sampleCT2 - offsetCT2;
 
     // Root-mean-square method current
     // 1) square current values
-    sqI = filteredI * filteredI;
+    sqCT1 = filteredCT1 * filteredCT1;
+    sqCT2 = filteredCT2 * filteredCT2;
     // 2) sum
-    sumI += sqI;
+    sumCT1 += sqCT1;
+    sumCT2 += sqCT2;
   }
 
-  Irms = squareRoot(sumI / Number_of_Samples)*multiplier;
+  IrmsCT1 = squareRoot(sumCT1 / Number_of_Samples)*multiplier;
+  IrmsCT2 = squareRoot(sumCT2 / Number_of_Samples)*multiplier;
 
   data = "CT1:";
-  data += Irms;
+  data += IrmsCT1;
+  data += ",CT2:";
+  data += IrmsCT2;
 
   //Reset accumulators
-  sumI = 0;
+  sumCT1 = 0;
+  sumCT2 = 0;
 //--------------------------------------------------------------------------------------
 
   return true;

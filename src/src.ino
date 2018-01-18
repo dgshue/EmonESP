@@ -45,9 +45,10 @@ void setup() {
 #endif
 
   DEBUG.println();
-  DEBUG.print("EmonESP ");
+  DEBUG.print("EmonMCU ");
   DEBUG.println(ESP.getChipId());
-  DEBUG.println("Firmware: "+ currentfirmware);
+  DEBUG.println("EmonESP Firmware: "+ currentfirmware);
+  DEBUG.println("EmonMCU Code Version: 0.1");
 
   // Read saved settings from the config
   config_load_settings();
