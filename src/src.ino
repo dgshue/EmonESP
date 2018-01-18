@@ -31,6 +31,7 @@
 #include "input.h"
 #include "emoncms.h"
 #include "mqtt.h"
+#include "ct.h"
 
 // -------------------------------------------------------------------
 // SETUP
@@ -44,9 +45,10 @@ void setup() {
 #endif
 
   DEBUG.println();
-  DEBUG.print("EmonESP ");
+  DEBUG.print("EmonMCU ");
   DEBUG.println(ESP.getChipId());
-  DEBUG.println("Firmware: "+ currentfirmware);
+  DEBUG.println("EmonESP Firmware: "+ currentfirmware);
+  DEBUG.println("EmonMCU Code Version: 0.1");
 
   // Read saved settings from the config
   config_load_settings();
@@ -62,6 +64,9 @@ void setup() {
 
   DEBUG.println("Server started");
 
+  //Setup ADS
+  ads_setup();
+
   delay(100);
 } // end setup
 
@@ -75,7 +80,7 @@ void loop()
   wifi_loop();
 
   String input = "";
-  boolean gotInput = input_get(input);
+  boolean gotInput = calcIrms(input);
 
   if (wifi_mode == WIFI_MODE_STA || wifi_mode == WIFI_MODE_AP_AND_STA)
   {
@@ -91,4 +96,3 @@ void loop()
     }
   }
 } // end loop
-

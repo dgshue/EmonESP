@@ -1,14 +1,6 @@
 # EmonMCU
 
-Fork of popular EmonESP, this contains code to sample data directly from the NodeMCU or other ESP8266 board.  There is no need for a emonTx, only some very basic circuit skill, soldering, and a way to flash your MC.
 
-The same setup applies and I've left the instructions below from EmonESP.  The only tricky bit that I've not had to do before is write out to SPIFFS, but it wasn't difficult.  I recommend using Atom and PlatfomIO. This was a new tool for me with this project but I'm starting to dig it.
-
-## Requirements
-
-- ESP-12E or ESP-12
-
-***
 
 # EmonESP User Guide
 
